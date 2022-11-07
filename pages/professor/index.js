@@ -25,7 +25,16 @@ const Professor = (req, res) => {
           })
         }
       />
-      <input type={"submit"} value={"student grades"} />
+      <input
+        type={"submit"}
+        value={"student grades"}
+        onClick={() =>
+          Router.push({
+            pathname: "/professor/grades",
+            query: { profId },
+          })
+        }
+      />
     </div>
   );
 };
