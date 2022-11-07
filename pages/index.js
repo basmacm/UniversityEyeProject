@@ -51,7 +51,10 @@ export default function Home() {
           query: { studentID: user.id },
         });
       else if (user.roleId == 102)
-        window.location.replace("http://localhost:3000/professor");
+        Router.push({
+          pathname: "/professor",
+          query: { profId: user.id },
+        });
       else if (user.roleId == 103)
         window.location.replace("http://localhost:3000/faculty");
     } else {
