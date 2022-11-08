@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
   MDBBadge,
   MDBBtn,
@@ -17,7 +18,7 @@ const queryData = async (query) => {
   return responseJson.dataArray;
 };
 
-const Student = (req, res) => {
+const coursedata = (req, res) => {
   const router = useRouter();
 
   const { studentID } = router.query;
@@ -39,27 +40,41 @@ const Student = (req, res) => {
   console.log(classes);
 
   return (
-    <MDBTable align="middle">
-      <MDBTableHead>
-        <tr>
-          <th scope="col">Course Name</th>
-          <th scope="col">Professor</th>
-          <th scope="col">Grade</th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        {classes.map((classM) => {
-          return (
-            <tr key={classM.id}>
-              <th scope="row">{classM.course_name}</th>
-              <td>{classM.professor}</td>
-              <td>{classM.grade}</td>
-            </tr>
-          );
-        })}
-      </MDBTableBody>
-    </MDBTable>
+    <div>
+      <table className="table-auto ">
+        <thead className="font-bold">
+          <tr>
+            <th className="border  border-emerald-500 px-4 py-2 text-emerald-600">
+              Course Name
+            </th>
+            <th className="border  border-emerald-500 px-4 py-2 text-emerald-600">
+              Professor
+            </th>
+            <th className="border  border-emerald-500 px-4 py-2 text-emerald-600">
+              Grade
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {classes.map((classM) => {
+            return (
+              <tr key={classM.id}>
+                <td className="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">
+                  {classM.course_name}
+                </td>
+                <td className="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">
+                  {classM.professor}
+                </td>
+                <td className="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">
+                  {classM.grade}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
-export default Student;
+export default coursedata;

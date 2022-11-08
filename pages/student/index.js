@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
   MDBBadge,
   MDBBtn,
@@ -14,18 +15,22 @@ const Student = (req, res) => {
   const { studentID } = router.query;
 
   return (
-    <div style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-      <input
-        type={"submit"}
-        value={"Courses"}
-        onClick={() =>
-          Router.push({
-            pathname: "/student/courses",
-            query: { studentID },
-          })
-        }
-      />
-      <input type={"submit"} value={"Documents"} />
+    <div className="flex flex-col p-10  justify-center">
+      <div className="basis-1/2  font-bold">
+        <input
+          type={"submit"}
+          value={"Courses"}
+          onClick={() =>
+            Router.push({
+              pathname: "/student/courses",
+              query: { studentID },
+            })
+          }
+        />
+      </div>
+      <div className="basis-1/2 font-bold">
+        <input type={"submit"} value={"Documents"} />
+      </div>
     </div>
   );
 };
