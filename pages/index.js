@@ -2,6 +2,20 @@ import { useEffect, useState } from "react";
 import cx from "classnames";
 import styles from "../styles/Signin.module.css";
 import Router from "next/router";
+const jsSHA = require("jssha");
+
+/*
+  Users:
+    Student:
+      Username: Basma
+      Password: password123
+    Faculty:
+      Username: Lee
+      Password: password
+    Professor:
+      Username: Kumar
+      Password: abc12345
+*/
 
 export default function Home() {
   const [connection, setConnection] = useState();
@@ -11,7 +25,7 @@ export default function Home() {
 
   const queryData = async (query) => {
     const apiUrlEndpoint = "http://localhost:3000/api/getdata?query=" + query;
-    console.log("Feching!", query);
+
     const response = await fetch(apiUrlEndpoint);
     const responseJson = await response.json();
 
@@ -34,17 +48,29 @@ export default function Home() {
     return user;
   };
 
+  const isPasswordCorrect = (user) => {
+    if (!user) return false;
+
+    const shaObj = new jsSHA("SHA-512", "TEXT", { encoding: "UTF8" });
+
+    shaObj.update(password); //Add password as the text of shaObj
+    const hash = shaObj.getHash("HEX"); //Convert password to hex
+
+    return hash.includes(user.password_hash);
+  };
+
   const submitUserRequest = (event) => {
     event.preventDefault();
 
     const user = getUser();
+    const passwordIsCorrect = isPasswordCorrect(user);
 
     /*
       101 = Student
       102 = Professor
       103 = Faculty
     */
-    if (user) {
+    if (user && passwordIsCorrect) {
       if (user.roleId == 101)
         Router.push({
           pathname: "/student",
@@ -57,8 +83,10 @@ export default function Home() {
         });
       else if (user.roleId == 103)
         window.location.replace("http://localhost:3000/faculty");
-    } else {
+    } else if (!user) {
       console.log("User does not exist!");
+    } else {
+      console.log("Incorrect Password");
     }
   };
 

@@ -6,9 +6,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.2",
     "classnames": "^2.3.2",
+    "jssha": "^3.3.0",
     "mdb-react-ui-kit": "^5.0.0",
     "mysql2": "^2.3.3",
     "next": "latest",
