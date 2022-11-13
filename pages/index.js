@@ -95,28 +95,30 @@ export default function Home() {
       <main className={cx(styles["form-signin"], "text-center", "mt-5")}>
         <form>
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-
-          <div className="form-floating">
+          <label htmlFor="floatingInput">Username</label>
+          <div className="mb-6">
             <input
-              type="username"
-              className="form-control"
+              type="text"
+              className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="floatingInput"
-              placeholder="Username"
+              placeholder="User Name"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
-            <label htmlFor="floatingInput">Username</label>
           </div>
-          <div className="form-floating">
+
+          <div className="form-floating"></div>
+          <div class="mb-6">
+            <label htmlFor="floatingPassword">Password</label>
+
             <input
               type="password"
-              className="form-control"
+              class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="floatingPassword"
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-            <label htmlFor="floatingPassword">Password</label>
           </div>
 
           <div className={cx(styles.checkbox, "mb-3")}>
