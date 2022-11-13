@@ -7,7 +7,7 @@ const jsSHA = require("jssha");
 /*
   Users:
     Student:
-      Username: Basma
+      Username: basma
       Password: password123
     Faculty:
       Username: Lee
@@ -22,6 +22,7 @@ export default function Home() {
   const [users, setUsers] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userIsNotCorrect, setUserIsNotCorrect] = useState(false);
 
   const queryData = async (query) => {
     const apiUrlEndpoint = "http://localhost:3000/api/getdata?query=" + query;
@@ -84,6 +85,7 @@ export default function Home() {
       else if (user.roleId == 103)
         window.location.replace("http://localhost:3000/faculty");
     } else if (!user) {
+      setUserIsNotCorrect(true);
       console.log("User does not exist!");
     } else {
       console.log("Incorrect Password");
@@ -103,7 +105,10 @@ export default function Home() {
               id="floatingInput"
               placeholder="User Name"
               value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={(event) => {
+                setUsername(event.target.value);
+                setUserIsNotCorrect(false);
+              }}
             />
           </div>
 
@@ -117,7 +122,10 @@ export default function Home() {
               id="floatingPassword"
               placeholder="Password"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setUserIsNotCorrect(false);
+              }}
             />
           </div>
 
@@ -133,6 +141,9 @@ export default function Home() {
           >
             Sign in
           </button>
+          {userIsNotCorrect && (
+            <div style={{ color: "red" }}>User is not correct</div>
+          )}
         </form>
       </main>
     </>
