@@ -11,7 +11,7 @@ const jsSHA = require("jssha");
       Password: password123
     Faculty:
       Username: Lee
-      Password: passwor  d
+      Password: password
     Professor:
       Username: Kumar
       Password: abc12345
